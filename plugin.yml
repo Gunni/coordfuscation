@@ -1,19 +1,31 @@
 name: coordfuscation
 main: cc.kjarni.aetherous.coordfuscation.Coordfuscation
-version: 1
+version: 2.0
 depend:
   - ProtocolLib
 commands:
-  /getoffsets:
-    description: Get Coordfuscation offset for player
-    usage: /getoffsets [Player]
-    permission: coordfuscation.getoffset
-    permission-message: Offsets are secret, access denied...
+  getoffset:
+    description: Get coordfuscation offsets
+    permission: coordfuscation.getoffset.self
+    permission-message: The offset is secret, access denied...
+    usage: Syntax error! Just type /getoffset [username]
+
 permissions:
   coordfuscation.*:
     description: All commands of Coordfuscation
     children:
-      coordfuscation.getoffset: true
-  coordfuscation.getoffset:
-    description: Get the offset for yourself or others
+      coordfuscation.getoffset.self: true
+      coordfuscation.getoffset.others: true
+      coordfuscation.getoffset.disable: false
+
+  coordfuscation.getoffset.self:
+    description: Get the offsets for the user
+    default: op
+
+  coordfuscation.getoffset.others:
+    description: Get the offsets for other users
+    default: op
+
+  coordfuscation.getoffset.disable:
+    description: Create no offset for users with this
     default: op

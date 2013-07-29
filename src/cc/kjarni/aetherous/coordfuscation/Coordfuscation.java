@@ -23,6 +23,7 @@
 package cc.kjarni.aetherous.coordfuscation;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.command.Command;
@@ -394,11 +395,44 @@ public final class Coordfuscation extends JavaPlugin
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
 	{
-		if(cmd.getName().equalsIgnoreCase("/getoffsets"))
+		String prefix = "[Coordfuscation]";
+
+		if(cmd.getName().equalsIgnoreCase("getoffset"))
 		{
-			if(sender.hasPermission("coordfuscation.getoffset"))
+			if (sender.hasPermission("coordfuscation.getoffset.self") && args.length == 0)
 			{
-				sender.sendMessage("getcoordfuscationoffsets command invoked!");
+				if (sender instanceof Player)
+				{
+					sender.sendMessage(String.format("%s Your offsets are:", prefix));
+					sender.sendMessage(String.format("%s X: %d", prefix, offsetCoords(((Player) sender).getPlayer()).X));
+					sender.sendMessage(String.format("%s Z: %d", prefix, offsetCoords(((Player) sender).getPlayer()).Y));
+				}
+				else
+				{
+					sender.sendMessage(String.format("%s Only players can use this command as the server has no offset for himself :P", prefix));
+					sender.sendMessage(String.format("%s Try /getoffset username", prefix));
+				}
+			}
+			else if (sender.hasPermission("coordfuscation.getoffset.others"))
+			{
+				List<Player> pl = getServer().matchPlayer(args[0]);
+
+				if (pl != null && pl.size() == 1)
+				{
+					Player p = pl.get(0);
+
+					sender.sendMessage(String.format("%s %s's offsets are:", prefix, p.getDisplayName()));
+					sender.sendMessage(String.format("%s X: %d", prefix, offsetCoords(p).X));
+					sender.sendMessage(String.format("%s Z: %d", prefix, offsetCoords(p).Y));
+				}
+				else
+				{
+					sender.sendMessage(String.format("%s User not found, or result contained multiple users", prefix));
+				}
+			}
+			else
+			{
+				sender.sendMessage(String.format("%s Access denied", prefix));
 			}
 
 			return true;
