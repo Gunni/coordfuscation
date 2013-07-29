@@ -1,3 +1,25 @@
+/**
+ * Copyright (c) 2013 Gabríel Arthúr Pétursson, Gunnar Guðvarðarson
+ * 
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package cc.kjarni.aetherous.coordfuscation;
 
 import java.util.HashMap;
@@ -26,7 +48,7 @@ public final class Coordfuscation extends JavaPlugin
 {
 	/**
 	 * Minecraft has various issues with large coordinates.
-	 * There are rounding issues for item frames (MC-3493).
+	 * There are issues for item frames (MC-3493).
 	 * There are huge floating point issues with coords > 20M.
 	 * 
 	 * Also if the absolute number of X or Z is set greater than
@@ -53,8 +75,6 @@ public final class Coordfuscation extends JavaPlugin
 			offY &= ~0x0F;
 
 			offsets.put(player, new Offset(offX, offY));
-
-			getLogger().info("Offset for " + player.getPlayerListName() + " is (" + offset.X + ", " + offset.Y + ")");
 		}
 
 		return offset;
