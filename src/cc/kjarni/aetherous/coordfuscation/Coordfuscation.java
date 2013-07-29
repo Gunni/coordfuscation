@@ -75,7 +75,8 @@ public final class Coordfuscation extends JavaPlugin
 			offX &= ~0x0F;
 			offY &= ~0x0F;
 
-			offsets.put(player, new Offset(offX, offY));
+			offset = new Offset(offX, offY);
+			offsets.put(player, offset);
 		}
 
 		return offset;
